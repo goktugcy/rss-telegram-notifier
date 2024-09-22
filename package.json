@@ -1,0 +1,19 @@
+{
+  "name": "rss-news-api",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "hono": "^4.6.2",
+    "rss-parser": "^3.13.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "@types/xml2js": "^0.4.14",
+    "wrangler": "^3.78.7"
+  },
+  "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
+}
