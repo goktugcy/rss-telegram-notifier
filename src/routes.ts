@@ -4,6 +4,24 @@ import { getRSSFeedUrl } from "./constants/rssFeeds";
 
 const news = new Hono();
 
+interface RSSItem {
+  title: string[];
+  link: string[];
+  guid: { _: string; $: { isPermaLink: string } }[];
+  description: string[];
+  pubDate: string[];
+  "media:content"?: {
+    $: {
+      medium: string;
+      url: string;
+      expression: string;
+      type: string;
+      width: string;
+      height: string;
+    };
+  }[];
+}
+
 news.get("/", async (c) => {
   const source = c.req.query("source");
   const category = c.req.query("category");
@@ -22,11 +40,11 @@ news.get("/", async (c) => {
     return c.json({ error: "Geçersiz haber kaynağı veya kategori." }, 400);
   }
 
-  let items = await fetchRSSFeed(source, category);
+  let items: RSSItem[] = await fetchRSSFeed(source, category);
 
   if (keyword) {
-    items = items.filter((item) =>
-      item.title?.toLowerCase().includes(keyword.toLowerCase())
+    items = items.filter((item: RSSItem) =>
+      item.title[0]?.toLowerCase().includes(keyword.toLowerCase())
     );
   }
 
