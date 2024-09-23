@@ -3,8 +3,9 @@ compatibility_date = "2024-09-22"
 compatibility_flags = [ "nodejs_compat_v2" ]
 
 
-# [vars]
-# MY_VAR = "my-variable"
+[vars]
+SUPABASE_URL = "https://kufgxlvheldohsqwdpxo.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt1Zmd4bHZoZWxkb2hzcXdkcHhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjcwNjkwNTksImV4cCI6MjA0MjY0NTA1OX0.4YMM7lz3jq6IbOdqRsqqeo-tlf7jUqEhIvkUU2v_b80"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
