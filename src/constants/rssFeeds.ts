@@ -60,9 +60,56 @@ const sozcuRss: { [key: string]: string } = {
   haberler: "https://www.sozcu.com.tr/feeds-haberler",
 };
 
+const cnnTurkRss: { [key: string]: string } = {
+  son_dakika: "https://www.cnnturk.com/feed/rss/all/news",
+  turkiye: "https://www.cnnturk.com/feed/rss/turkiye/news",
+  dunya: "https://www.cnnturk.com/feed/rss/dunya/news",
+  kultur_sanat: "https://www.cnnturk.com/feed/rss/kultur-sanat/news",
+  bilim_teknoloji: "https://www.cnnturk.com/feed/rss/bilim-teknoloji/news",
+  yasam: "https://www.cnnturk.com/feed/rss/yasam/news",
+  spor: "https://www.cnnturk.com/feed/rss/spor/news",
+  ekonomi: "https://www.cnnturk.com/feed/rss/ekonomi/news",
+  magazin: "https://www.cnnturk.com/feed/rss/magazin/news",
+  saglik: "https://www.cnnturk.com/feed/rss/saglik/news",
+  yazar: "https://www.cnnturk.com/feed/rss/yazarlar",
+  seyahat: "https://www.cnnturk.com/feed/rss/seyahat/news",
+};
+
+const aaRss: { [key: string]: string } = {
+  son_dakika: "https://www.aa.com.tr/tr/rss/default?cat=guncel",
+  dunya: "https://www.aa.com.tr/tr/rss/default?cat=dunya",
+  ekonomi: "https://www.aa.com.tr/tr/rss/default?cat=ekonomi",
+  spor: "https://www.aa.com.tr/tr/rss/default?cat=spor",
+  saglik: "https://www.aa.com.tr/tr/rss/default?cat=saglik",
+  egitim: "https://www.aa.com.tr/tr/rss/default?cat=egitim",
+  yasam: "https://www.aa.com.tr/tr/rss/default?cat=yasam",
+  politika: "https://www.aa.com.tr/tr/rss/default?cat=politika",
+  kultur_sanat: "https://www.aa.com.tr/tr/teyithatti/rss/news?cat=kultur-sanat",
+  bilim_teknoloji:
+    "https://www.aa.com.tr/tr/teyithatti/rss/news?cat=bilim-teknoloji",
+};
+
+const ntvRss: { [key: string]: string } = {
+  son_dakika: "https://www.ntv.com.tr/son-dakika.rss",
+  dunya: "https://www.ntv.com.tr/dunya.rss",
+  turkiye: "https://www.ntv.com.tr/turkiye.rss",
+  ekonomi: "https://www.ntv.com.tr/ekonomi.rss",
+  ntv_para: "https://www.ntv.com.tr/ntvpara.rss",
+  spor: "https://www.ntv.com.tr/spor.rss",
+  yasam: "https://www.ntv.com.tr/yasam.rss",
+  magazin: "https://www.ntv.com.tr/magazin.rss",
+  teknoloji: "https://www.ntv.com.tr/teknoloji.rss",
+  saglik: "https://www.ntv.com.tr/saglik.rss",
+  egitim: "https://www.ntv.com.tr/egitim.rss",
+  otomobil: "https://www.ntv.com.tr/otomobil.rss",
+};
+
 export const rssFeeds: { [key: string]: { [key: string]: string } } = {
   haberturk: haberturkRss,
   sozcu: sozcuRss,
+  cnnturk: cnnTurkRss,
+  anadolu_ajansi: aaRss,
+  ntv: ntvRss,
 };
 
 export function getRSSFeedUrl(
