@@ -1,13 +1,13 @@
 import axios from "axios";
 import { parseStringPromise } from "xml2js";
-import { getRSSFeedUrl } from "../constants/rssFeeds";
+import { getRSSFeedUrl, rssFeeds } from "../constants/rssFeeds";
 import { createSupabaseClient } from "../db/supabase";
 import { URL } from "url";
 
 export async function fetchRSSFeed(source: string, category: string) {
   const url = getRSSFeedUrl(source, category);
   if (!url) {
-    console.error("Geçersiz URL:", { source, category });
+    console.error("Invalid URL:", { source, category });
     return [];
   }
 
@@ -18,58 +18,69 @@ export async function fetchRSSFeed(source: string, category: string) {
     const firstItem = result.rss.channel[0].item[0];
     return firstItem ? [firstItem] : [];
   } catch (error) {
-    console.error("RSS Feed alınırken hata oluştu:", error);
+    console.error("Error while retrieving RSS Feed:", error);
     return [];
   }
 }
 
 export const checkFeedsAndNotify = async (c: {
-  env: { SUPABASE_URL: string; SUPABASE_KEY: string; TELEGRAM_BOT_URL: string };
+  env: {
+    SUPABASE_URL: string;
+    SUPABASE_KEY: string;
+    TELEGRAM_BOT_URL: string;
+    CHAT_ID: string;
+  };
 }) => {
   const client = createSupabaseClient(c.env);
+  for (const source in rssFeeds) {
+    const categories = rssFeeds[source];
+    for (const category in categories) {
+      const items = await fetchRSSFeed(source, category);
 
-  // TEST RSS FEED
-  const items = await fetchRSSFeed("sozcu", "gundem");
+      for (const item of items) {
+        const { title, description, link } = item;
+        const linkUrl = new URL(item.link[0]);
+        const baseUrl = `${linkUrl.protocol}//${linkUrl.host}`;
 
-  for (const item of items) {
-    const { title, link } = item;
-    const linkUrl = new URL(item.link[0]);
-    const baseUrl = `${linkUrl.protocol}//${linkUrl.host}`;
+        const { data: channelData, error: channelError } = await client
+          .from("channels")
+          .select("*")
+          .eq("link", baseUrl)
+          .single();
 
-    const { data: channelData, error: channelError } = await client
-      .from("channels")
-      .select("*")
-      .eq("link", baseUrl)
-      .single();
+        if (channelError) {
+          console.error(
+            "Error while retrieving channel:",
+            channelError.message
+          );
+          continue;
+        }
 
-    if (channelError) {
-      console.error("Kanal alınırken hata oluştu:", channelError.message);
-      continue;
-    }
+        const { data: newsData, error: newsError } = await client
+          .from("news")
+          .select("title")
+          .eq("title", title[0])
+          .eq("channel_id", channelData?.id);
 
-    const { data: newsData, error: newsError } = await client
-      .from("news")
-      .select("title")
-      .eq("title", title[0])
-      .eq("channel_id", channelData?.id);
+        if (newsError) {
+          console.error("Error while retrieving news:", newsError.message);
+          continue;
+        }
 
-    if (newsError) {
-      console.error("Haber alınırken hata oluştu:", newsError.message);
-      continue;
-    }
+        if (!newsData?.length) {
+          await client.from("news").insert({
+            title: title[0],
+            description: item.description[0],
+            channel_id: channelData?.id,
+          });
 
-    if (!newsData?.length) {
-      await client.from("news").insert({
-        title: title[0],
-        description: item.description[0],
-        channel_id: channelData?.id,
-      });
-
-      // Telegram'a bildirim gönder
-      await axios.post(c.env.TELEGRAM_BOT_URL, {
-        chat_id: "-1002329601365",
-        text: `${title[0]} - ${link[0]}`,
-      });
+          await axios.post(c.env.TELEGRAM_BOT_URL, {
+            chat_id: c.env.CHAT_ID,
+            text: `*${channelData?.name}*\n\n*Başlık:* ${title[0]}\n\n*Açıklama:* ${description[0]}\n\n[Haberi Oku](${link[0]})`,
+            parse_mode: "Markdown",
+          });
+        }
+      }
     }
   }
 };

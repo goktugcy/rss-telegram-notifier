@@ -7,6 +7,7 @@ interface EnvBindings extends Bindings {
   SUPABASE_URL: string;
   SUPABASE_KEY: string;
   TELEGRAM_BOT_URL: string;
+  CHAT_ID: string;
 }
 
 const app = new Hono<{ Bindings: EnvBindings }>();
@@ -23,7 +24,7 @@ app.get("/check-feeds", async (c) => {
 });
 
 async function handleScheduled(env: EnvBindings) {
-  console.log("Cron job tetiklendi, RSS feed'leri kontrol ediliyor...");
+  console.log("Cron job triggered, checking RSS feeds...");
   await checkFeedsAndNotify({ env });
 }
 
