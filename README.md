@@ -8,7 +8,7 @@ This project is an RSS News API that fetches RSS feeds from various sources, sto
 
 ### Prerequisites
 
-- Node.js
+- Hono
 - npm
 - Cloudflare Workers
 - Supabase account
