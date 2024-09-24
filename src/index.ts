@@ -1,9 +1,8 @@
 import { Hono } from "hono";
 import news from "./routes";
-import { Bindings } from "hono/types";
 import { checkFeedsAndNotify } from "./services/rssService";
 
-interface EnvBindings extends Bindings {
+interface EnvBindings {
   SUPABASE_URL: string;
   SUPABASE_KEY: string;
   TELEGRAM_BOT_URL: string;

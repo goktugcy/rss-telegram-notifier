@@ -4,6 +4,13 @@ import { getRSSFeedUrl } from "../constants/rssFeeds";
 import { createSupabaseClient } from "../db/supabase";
 import { URL } from "url";
 
+interface EnvBindings {
+  SUPABASE_URL: string;
+  SUPABASE_KEY: string;
+  TELEGRAM_BOT_URL: string;
+  CHAT_ID: string;
+}
+
 export async function fetchRSSFeed(source: string, category: string) {
   const url = getRSSFeedUrl(source, category);
   if (!url) {
@@ -23,12 +30,7 @@ export async function fetchRSSFeed(source: string, category: string) {
   }
 }
 
-export const checkFeedsAndNotify = async (env: {
-  SUPABASE_URL: string;
-  SUPABASE_KEY: string;
-  TELEGRAM_BOT_URL: string;
-  CHAT_ID: string;
-}) => {
+export const checkFeedsAndNotify = async (env: EnvBindings) => {
   const client = createSupabaseClient(env);
 
   // TEST RSS FEED

@@ -1,17 +1,10 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-type Bindings = {
+interface EnvBindings {
   SUPABASE_URL: string;
   SUPABASE_KEY: string;
-};
+}
 
-export const createSupabaseClient = (env: Bindings) => {
-  const supabaseUrl = env.SUPABASE_URL;
-  const supabaseKey = env.SUPABASE_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error("SUPABASE_URL and SUPABASE_KEY must be defined.");
-  }
-
-  return createClient(supabaseUrl, supabaseKey);
-};
+export function createSupabaseClient(env: EnvBindings): SupabaseClient {
+  return createClient(env.SUPABASE_URL, env.SUPABASE_KEY);
+}
