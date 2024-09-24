@@ -19,18 +19,18 @@ app.get("/", (c) => {
 app.route("/news", news);
 
 app.get("/check-feeds", async (c) => {
-  await checkFeedsAndNotify(c);
+  await checkFeedsAndNotify(c.env);
   return c.text("Feeds checked!");
 });
 
 async function handleScheduled(env: EnvBindings) {
   console.log("Cron job triggered, checking RSS feeds...");
-  await checkFeedsAndNotify({ env });
+  await checkFeedsAndNotify(env);
 }
 
 export default {
   fetch: app.fetch,
   scheduled(event: ScheduledEvent, env: EnvBindings, ctx: ExecutionContext) {
-    ctx.waitUntil(handleScheduled(env));
+    return handleScheduled(env);
   },
 };
