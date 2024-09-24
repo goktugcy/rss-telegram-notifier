@@ -7,7 +7,7 @@ main = "src/index.ts"
 SUPABASE_URL = "https://kufgxlxxxxxxqwdpxo.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIxxxxxxxxxxxxxxxxxxxxxxxxx..."
 TELEGRAM_BOT_URL = "https://api.telegram.org/bot7909xxxx462:AAGJTORVxxxxxxxxxxxxxxxxxxx/sendMessage"
-CHAT_ID = "-10023296xxxx"
+CHAT_ID = "-10023296xxxxx"
 
 [triggers]
 crons = ["*/1 * * * *"] 
