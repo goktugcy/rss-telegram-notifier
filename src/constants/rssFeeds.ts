@@ -75,20 +75,6 @@ const cnnTurkRss: { [key: string]: string } = {
   // seyahat: "https://www.cnnturk.com/feed/rss/seyahat/news",
 };
 
-const aaRss: { [key: string]: string } = {
-  son_dakika: "https://www.aa.com.tr/tr/rss/default?cat=guncel",
-  dunya: "https://www.aa.com.tr/tr/rss/default?cat=dunya",
-  // ekonomi: "https://www.aa.com.tr/tr/rss/default?cat=ekonomi",
-  // spor: "https://www.aa.com.tr/tr/rss/default?cat=spor",
-  // saglik: "https://www.aa.com.tr/tr/rss/default?cat=saglik",
-  // egitim: "https://www.aa.com.tr/tr/rss/default?cat=egitim",
-  // yasam: "https://www.aa.com.tr/tr/rss/default?cat=yasam",
-  // politika: "https://www.aa.com.tr/tr/rss/default?cat=politika",
-  // kultur_sanat: "https://www.aa.com.tr/tr/teyithatti/rss/news?cat=kultur-sanat",
-  // bilim_teknoloji:
-  //   "https://www.aa.com.tr/tr/teyithatti/rss/news?cat=bilim-teknoloji",
-};
-
 const ntvRss: { [key: string]: string } = {
   son_dakika: "https://www.ntv.com.tr/son-dakika.rss",
   dunya: "https://www.ntv.com.tr/dunya.rss",
@@ -108,7 +94,6 @@ export const rssFeeds: { [key: string]: { [key: string]: string } } = {
   haberturk: haberturkRss,
   sozcu: sozcuRss,
   cnnturk: cnnTurkRss,
-  anadolu_ajansi: aaRss,
   ntv: ntvRss,
 };
 
