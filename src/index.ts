@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import news from "./routes";
 import { Bindings } from "hono/types";
-import { createSupabaseClient } from "./db/supabase";
 import { checkFeedsAndNotify } from "./services/rssService";
+
 interface EnvBindings extends Bindings {
   SUPABASE_URL: string;
   SUPABASE_KEY: string;
@@ -17,18 +17,19 @@ app.get("/", (c) => {
 
 app.route("/news", news);
 
-app.get("/health", async (c) => {
-  const client = createSupabaseClient(c.env);
-  const { data, error } = await client.from("channels").select("*");
-  if (error) {
-    return c.json({ error: error.message }, 500);
-  }
-  return c.json(data);
-});
-
 app.get("/check-feeds", async (c) => {
   await checkFeedsAndNotify(c);
   return c.text("Feeds checked!");
 });
 
-export default app;
+async function handleScheduled(env: EnvBindings) {
+  console.log("Cron job tetiklendi, RSS feed'leri kontrol ediliyor...");
+  await checkFeedsAndNotify({ env });
+}
+
+export default {
+  fetch: app.fetch,
+  scheduled(event: ScheduledEvent, env: EnvBindings, ctx: ExecutionContext) {
+    ctx.waitUntil(handleScheduled(env));
+  },
+};

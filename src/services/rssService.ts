@@ -11,25 +11,14 @@ export async function fetchRSSFeed(source: string, category: string) {
     return [];
   }
 
-  if (typeof url !== "string") {
-    console.error("URL bir string değil:", url);
-    return [];
-  }
-
   try {
     const response = await axios.get(url);
     const result = await parseStringPromise(response.data);
-    return result.rss.channel[0].item;
+
+    const firstItem = result.rss.channel[0].item[0];
+    return firstItem ? [firstItem] : [];
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(
-        "RSS Feed alınırken hata oluştu:",
-        error.message,
-        error.stack
-      );
-    } else {
-      console.error("RSS Feed alınırken bilinmeyen bir hata oluştu:", error);
-    }
+    console.error("RSS Feed alınırken hata oluştu:", error);
     return [];
   }
 }
@@ -39,7 +28,7 @@ export const checkFeedsAndNotify = async (c: {
 }) => {
   const client = createSupabaseClient(c.env);
 
-  //TEST RSS FEED
+  // TEST RSS FEED
   const items = await fetchRSSFeed("sozcu", "gundem");
 
   for (const item of items) {
@@ -53,35 +42,33 @@ export const checkFeedsAndNotify = async (c: {
       .eq("link", baseUrl)
       .single();
 
-    console.log(baseUrl);
-    console.log(channelData?.id);
-
-    if (channelError instanceof Error) {
+    if (channelError) {
       console.error("Kanal alınırken hata oluştu:", channelError.message);
       continue;
     }
 
-    const { data, error } = await client
+    const { data: newsData, error: newsError } = await client
       .from("news")
       .select("title")
-      .eq("title", title[0]);
+      .eq("title", title[0])
+      .eq("channel_id", channelData?.id);
 
-    if (error instanceof Error) {
-      console.error("Haber alınırken hata oluştu:", error.message);
+    if (newsError) {
+      console.error("Haber alınırken hata oluştu:", newsError.message);
       continue;
     }
 
-    if (!data?.length) {
+    if (!newsData?.length) {
       await client.from("news").insert({
         title: title[0],
         description: item.description[0],
-        channel_id: channelData?.id
+        channel_id: channelData?.id,
       });
 
-      const TELEGRAM_BOT_URL = c.env.TELEGRAM_BOT_URL;
-      await axios.post(TELEGRAM_BOT_URL as string, {
-        chat_id: "811213988",
-        text: `Yeni Haber: ${title[0]} - ${link[0]}`,
+      // Telegram'a bildirim gönder
+      await axios.post(c.env.TELEGRAM_BOT_URL, {
+        chat_id: "-1002329601365",
+        text: `${title[0]} - ${link[0]}`,
       });
     }
   }
