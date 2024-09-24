@@ -2,6 +2,8 @@
 
 This project is an RSS News API that fetches RSS feeds from various sources, stores them in a Supabase database, and sends notifications to a Telegram channel.
 
+![RSS News API](https://kufgxlvheldohsqwdpxo.supabase.co/storage/v1/object/public/pub/Ekran%20Resmi%202024-09-24%2022.31.44.png)
+
 ## Getting Started
 
 ### Prerequisites
