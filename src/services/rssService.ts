@@ -76,7 +76,7 @@ export const checkFeedsAndNotify = async (env: EnvBindings) => {
 
           await axios.post(env.TELEGRAM_BOT_URL, {
             chat_id: env.CHAT_ID,
-            text: `*${channelData?.name}*\n\n*Başlık:* ${title[0]}\n\n*Açıklama:* ${description[0]}\n\n[Haberin Devamı](${link[0]})`,
+            text: `*${channelData?.name}*\n\n ${title[0]}\n\n ${description[0]}\n\n[Haberin Devamı](${link[0]})`,
             parse_mode: "Markdown",
           });
         }

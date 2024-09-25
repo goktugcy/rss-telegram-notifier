@@ -75,26 +75,15 @@ const cnnTurkRss: { [key: string]: string } = {
   // seyahat: "https://www.cnnturk.com/feed/rss/seyahat/news",
 };
 
-const ntvRss: { [key: string]: string } = {
-  son_dakika: "https://www.ntv.com.tr/son-dakika.rss",
-  dunya: "https://www.ntv.com.tr/dunya.rss",
-  turkiye: "https://www.ntv.com.tr/turkiye.rss",
-  ekonomi: "https://www.ntv.com.tr/ekonomi.rss",
-  // ntv_para: "https://www.ntv.com.tr/ntvpara.rss",
-  spor: "https://www.ntv.com.tr/spor.rss",
-  // yasam: "https://www.ntv.com.tr/yasam.rss",
-  // magazin: "https://www.ntv.com.tr/magazin.rss",
-  teknoloji: "https://www.ntv.com.tr/teknoloji.rss",
-  // saglik: "https://www.ntv.com.tr/saglik.rss",
-  // egitim: "https://www.ntv.com.tr/egitim.rss",
-  // otomobil: "https://www.ntv.com.tr/otomobil.rss",
+const t24Rss: { [key: string]: string } = {
+  gundem: "https://t24.com.tr/rss/haber/gundem",
 };
 
 export const rssFeeds: { [key: string]: { [key: string]: string } } = {
   haberturk: haberturkRss,
   sozcu: sozcuRss,
   cnnturk: cnnTurkRss,
-  ntv: ntvRss,
+  t24: t24Rss,
 };
 
 export function getRSSFeedUrl(
