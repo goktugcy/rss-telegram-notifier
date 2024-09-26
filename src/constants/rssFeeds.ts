@@ -25,41 +25,6 @@ const haberturkRss: { [key: string]: string } = {
   // yerel_haberler: "https://www.haberturk.com/rss/yerel-haberler.xml",
 };
 
-const sozcuRss: { [key: string]: string } = {
-  son_dakika: "https://www.sozcu.com.tr/feeds-son-dakika",
-  gundem: "https://www.sozcu.com.tr/feeds-rss-category-gundem",
-  // voleybol: "https://www.sozcu.com.tr/feeds-rss-category-voleybol",
-  // kripto: "https://www.sozcu.com.tr/feeds-rss-category-kripto",
-  // emlak: "https://www.sozcu.com.tr/feeds-rss-category-emlak",
-  // emtia: "https://www.sozcu.com.tr/feeds-rss-category-emtia",
-  // borsa: "https://www.sozcu.com.tr/feeds-rss-category-borsa",
-  // kesfet: "https://www.sozcu.com.tr/feeds-rss-category-kesfet",
-  // ilan: "https://www.sozcu.com.tr/feeds-rss-category-ilan",
-  // dunyadan_futbol: "https://www.sozcu.com.tr/feeds-rss-category-dunyadan-spor",
-  // hayat: "https://www.sozcu.com.tr/feeds-rss-category-hayat",
-  // sozcu: "https://www.sozcu.com.tr/feeds-rss-category-sozcu",
-  // diger_sporlar: "https://www.sozcu.com.tr/feeds-rss-category-diger-sporlar",
-  // basketbol: "https://www.sozcu.com.tr/feeds-rss-category-basketbol",
-  // futbol: "https://www.sozcu.com.tr/feeds-rss-category-futbol",
-  // kultur_sanat: "https://www.sozcu.com.tr/feeds-rss-category-kultur-sanat",
-  // gunun_icinden: "https://www.sozcu.com.tr/feeds-rss-category-gunun-icinden",
-  // otomotiv: "https://www.sozcu.com.tr/feeds-rss-category-otomotiv",
-  // egitim: "https://www.sozcu.com.tr/feeds-rss-category-egitim",
-  // astroloji: "https://www.sozcu.com.tr/feeds-rss-category-astroloji",
-  // bilim_teknoloji:
-  //   "https://www.sozcu.com.tr/feeds-rss-category-bilim-teknoloji",
-  // sigorta: "https://www.sozcu.com.tr/feeds-rss-category-sigorta",
-  // finans: "https://www.sozcu.com.tr/feeds-rss-category-finans",
-  // ekonomi: "https://www.sozcu.com.tr/feeds-rss-category-ekonomi",
-  // yazarlar: "https://www.sozcu.com.tr/feeds-rss-category-yazar",
-  // yasam: "https://www.sozcu.com.tr/feeds-rss-category-yasam",
-  // spor: "https://www.sozcu.com.tr/feeds-rss-category-spor",
-  // saglik: "https://www.sozcu.com.tr/feeds-rss-category-saglik",
-  // magazin: "https://www.sozcu.com.tr/feeds-rss-category-magazin",
-  // dunya: "https://www.sozcu.com.tr/feeds-rss-category-dunya",
-  // haberler: "https://www.sozcu.com.tr/feeds-haberler",
-};
-
 const cnnTurkRss: { [key: string]: string } = {
   son_dakika: "https://www.cnnturk.com/feed/rss/all/news",
   turkiye: "https://www.cnnturk.com/feed/rss/turkiye/news",
@@ -81,7 +46,6 @@ const t24Rss: { [key: string]: string } = {
 
 export const rssFeeds: { [key: string]: { [key: string]: string } } = {
   haberturk: haberturkRss,
-  sozcu: sozcuRss,
   cnnturk: cnnTurkRss,
   t24: t24Rss,
 };
