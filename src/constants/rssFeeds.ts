@@ -1,6 +1,6 @@
 const haberturkRss: { [key: string]: string } = {
   gundem: "https://www.haberturk.com/rss/kategori/gundem.xml",
-  // haberturk_ekonomi: "https://www.haberturk.com/rss/ekonomi.xml",
+  haberturk_ekonomi: "https://www.haberturk.com/rss/ekonomi.xml",
   // tum_haberler: "https://www.haberturk.com/rss/manset.xml",
   // ekonomi: "https://www.haberturk.com/rss/ekonomi.xml",
   // spor: "https://www.haberturk.com/rss/spor.xml",
@@ -35,13 +35,14 @@ const cnnTurkRss: { [key: string]: string } = {
   // spor: "https://www.cnnturk.com/feed/rss/spor/news",
   // ekonomi: "https://www.cnnturk.com/feed/rss/ekonomi/news",
   // magazin: "https://www.cnnturk.com/feed/rss/magazin/news",
-  // saglik: "https://www.cnnturk.com/feed/rss/saglik/news",
+  saglik: "https://www.cnnturk.com/feed/rss/saglik/news",
   // yazar: "https://www.cnnturk.com/feed/rss/yazarlar",
   // seyahat: "https://www.cnnturk.com/feed/rss/seyahat/news",
 };
 
 const t24Rss: { [key: string]: string } = {
   gundem: "https://t24.com.tr/rss/haber/gundem",
+  bilim_teknoloji: "https://t24.com.tr/rss/haber/bilim-teknoloji",
 };
 
 export const rssFeeds: { [key: string]: { [key: string]: string } } = {
