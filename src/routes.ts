@@ -40,7 +40,7 @@ news.get("/", async (c) => {
     return c.json({ error: "Geçersiz haber kaynağı veya kategori." }, 400);
   }
 
-  let items: RSSItem[] = await fetchRSSFeed(source, category);
+  let items = await fetchRSSFeed(source, category) as RSSItem[];
 
   if (keyword) {
     items = items.filter((item: RSSItem) =>

@@ -2,7 +2,6 @@ import axios from "axios";
 import { parseStringPromise } from "xml2js";
 import { getRSSFeedUrl, rssFeeds } from "../constants/rssFeeds";
 import { createSupabaseClient } from "../db/supabase";
-import { URL } from "url";
 
 interface EnvBindings {
   SUPABASE_URL: string;
